@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One-line installer for reddit-scrape
-# Usage: bash <(curl -s https://raw.githubusercontent.com/farsonic/reddit-scrape/main/install.sh)
+# One-line installer for reddit-digest
+# Usage: bash <(curl -s https://raw.githubusercontent.com/farsonic/reddit-digest/main/install.sh)
 
 # 1️⃣ Clone (or pull) the repo
-if [ -d "reddit-scrape" ]; then
-    echo "Updating existing reddit-scrape directory..."
-    cd reddit-scrape && git pull origin main
+if [ -d "reddit-digest" ]; then
+    echo "Updating existing reddit-digest directory..."
+    cd reddit-digest && git pull origin main
 else
-    echo "Cloning reddit-scrape..."
-    git clone https://github.com/farsonic/reddit-scrape.git
-    cd reddit-scrape
+    echo "Cloning reddit-digest..."
+    git clone https://github.com/farsonic/reddit-digest.git
+    cd reddit-digest
 fi
 
 # 2️⃣ Create a virtual environment
@@ -32,6 +32,6 @@ cat <<EOF
 Next steps:
  1. Copy and edit config.json with your Reddit API credentials.
  2. Place your OAuth client JSON (gdrive-creds.json) in this folder.
- 3. Run the script: python3 reddit_scrape.py
+ 3. Run the script: python3 reddit_digest.py
 EOF
 
