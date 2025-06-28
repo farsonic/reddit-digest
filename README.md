@@ -1,4 +1,4 @@
-# Reddit Scraper & Google Drive/Docs Uploader
+# Reddit Digest & Google Drive/Docs Uploader
 
 A Python script to fetch top posts (and optional comments/links) from a subreddit within a defined time window, render them to Markdown, convert to a Google Doc, and upload to your personal Google Drive.
 
