@@ -18,7 +18,7 @@ A Python script to fetch top posts (and optional comments/links) from a subreddi
 ## Repository Layout
 
 ```
-reddit-scrape/
+reddit-digest/
 ├── config.json         # Reddit + Drive configuration
 ├── gdrive-creds.json   # OAuth client JSON from Google
 ├── token.json          # Cached OAuth tokens (auto-generated)
@@ -118,7 +118,7 @@ pip3 install praw \
 Install in one line:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/farsonic/reddit-scrape/main/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/farsonic/reddit-digest/main/install.sh)
 ```
 
 This will clone or update the repo, create a virtual environment, install all Python deps, and prompt you to configure `config.json` & place `gdrive-creds.json`.
