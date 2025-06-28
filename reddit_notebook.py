@@ -8,11 +8,17 @@ import datetime
 import praw
 from datetime import timezone
 from prawcore import ResponseException, Redirect
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
+
+# Optional Google APIs imports
+try:
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    from googleapiclient.discovery import build
+    from googleapiclient.http import MediaFileUpload
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    GOOGLE_AVAILABLE = True
+except ImportError:
+    GOOGLE_AVAILABLE = False
 
 # ── Load configuration ────────────────────────────────────────────────
 CONFIG_PATH = "config.json"
@@ -28,9 +34,14 @@ reddit = praw.Reddit(
     check_for_async=False
 )
 
-# ── Set up Google Drive & Docs clients (Installed-App OAuth) ──────────
+# Globals for Google services
 drive_service = docs_service = None
-if cfg["drive"].get("enabled"):
+
+def setup_google_clients():
+    """
+    Initialize Google Drive & Docs clients using Installed-App OAuth.
+    Returns (drive_service, docs_service).
+    """
     SCOPES = [
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/documents"
@@ -38,7 +49,6 @@ if cfg["drive"].get("enabled"):
     token_path = "token.json"
     creds = None
 
-    # load or refresh credentials
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
     if not creds or not creds.valid:
@@ -52,11 +62,12 @@ if cfg["drive"].get("enabled"):
         with open(token_path, "w") as token_file:
             token_file.write(creds.to_json())
 
-    drive_service = build("drive", "v3", credentials=creds)
-    docs_service = build("docs", "v1", credentials=creds)
+    drive = build("drive", "v3", credentials=creds)
+    docs = build("docs", "v1", credentials=creds)
+    return drive, docs
 
 
-def ensure_drive_folder(name: str) -> str:
+def ensure_drive_folder(name: str, drive_service) -> str:
     """Find or create a folder in My Drive by name; return its ID."""
     resp = drive_service.files().list(
         q=(
@@ -151,33 +162,23 @@ def write_markdown(subr, hours, total, posts, grab_comments, out_dir):
     return path
 
 
-def upload_markdown_as_doc(md_path, folder_id):
+def upload_markdown_as_doc(md_path, folder_id, drive_service, docs_service):
     """Convert the markdown into a Google Doc in the given folder."""
-    # 1) read md
     with open(md_path, "r", encoding="utf-8") as f:
         md = f.read()
-
-    # 2) create empty Doc
     doc = docs_service.documents().create(
         body={"title": os.path.basename(md_path).replace(".md","")}
     ).execute()
     doc_id = doc["documentId"]
-
-    # 3) insert markdown text
     docs_service.documents().batchUpdate(
         documentId=doc_id,
-        body={"requests":[
-            {"insertText": {"location":{"index":1}, "text": md}}
-        ]}
+        body={"requests":[{"insertText": {"location": {"index": 1}, "text": md}}]}
     ).execute()
-
-    # 4) move into folder
     drive_service.files().update(
         fileId=doc_id,
         addParents=folder_id,
         fields="id, parents"
     ).execute()
-
     print(f"Created Google Doc: https://docs.google.com/document/d/{doc_id}/edit")
 
 
@@ -198,9 +199,16 @@ def main():
     md_path = write_markdown(subr, hrs, total, posts, grab, out_dir)
     print(f"Saved markdown to {md_path}")
 
-    if cfg["drive"].get("enabled"):
-        folder_id = ensure_drive_folder(cfg["drive"]["folder_name"])
-        upload_markdown_as_doc(md_path, folder_id)
+    do_upload = False
+    if GOOGLE_AVAILABLE:
+        ans = input("Upload to Google Drive as Doc? (y/N): ").strip().lower()
+        do_upload = ans.startswith("y")
+    if do_upload:
+        drive, docs = setup_google_clients()
+        folder_id = ensure_drive_folder(cfg["drive"]["folder_name"], drive)
+        upload_markdown_as_doc(md_path, folder_id, drive, docs)
+    elif not GOOGLE_AVAILABLE:
+        print("Google libraries not installed—skipping upload.")
 
 if __name__ == "__main__":
     main()
