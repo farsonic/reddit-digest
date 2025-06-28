@@ -22,7 +22,7 @@ source venv/bin/activate
 # 3️⃣ Install Python dependencies
 echo "Installing Python dependencies..."
 pip install --upgrade pip
-pip install praw google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+pip install praw google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib podcastfy
 
 # 4️⃣ Reminder: configure credentials
 cat <<EOF
