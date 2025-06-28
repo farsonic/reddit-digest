@@ -1,0 +1,16 @@
+{
+  "reddit": {
+    "client_id":     "YOUR_REDDIT_CLIENT_ID",
+    "client_secret": "YOUR_REDDIT_CLIENT_SECRET",
+    "user_agent":    "macos:newslister:v1.0 (by u/YourRedditUser)"
+  },
+  "output": {
+    "local_dir": "./output",
+    "include_comments": true
+  },
+  "drive": {
+    "enabled": true,
+    "credentials_file": "gdrive-creds.json",
+    "folder_name": "Reddit Reports"
+  }
+}
