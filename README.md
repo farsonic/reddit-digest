@@ -1,5 +1,7 @@
 # Reddit Digest & Google Drive/Docs Uploader
 
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px; width: 217px" />](https://buymeacoffee.com/farsonic)
+
 A Python script to fetch top posts (and optional comments/links) from a subreddit within a defined time window, render them to Markdown, convert to a Google Doc, and upload to your personal Google Drive.
 
 ---
