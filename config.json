@@ -1,16 +1,59 @@
 {
   "reddit": {
-    "client_id":     "YOUR_REDDIT_CLIENT_ID",
-    "client_secret": "YOUR_REDDIT_CLIENT_SECRET",
-    "user_agent":    "macos:newslister:v1.0 (by u/YourRedditUser)"
+    "client_id":     "",
+    "client_secret": "",
+    "user_agent":    ""
   },
+
+  "subreddits": [
+    ""
+  ],
+
+  "default": {
+    "hours":      24,
+    "top_posts":  0
+  },
+
   "output": {
-    "local_dir": "./output",
-    "include_comments": true
+    "local_dir":         "./output",
+    "include_comments":  false
   },
+
   "drive": {
-    "enabled": true,
-    "credentials_file": "gdrive-creds.json",
-    "folder_name": "Reddit Reports"
-  }
+    "enabled":           false,
+    "credentials_file":  "",
+    "folder_name":       ""
+  },
+
+  "stocks": {
+    "enabled":    false,
+    "symbols":    [
+      ""
+    ],
+    "alpha_vantage": {
+      "api_key": ""
+    }
+  },
+
+  "commodities": {
+    "enabled":    false,
+    "items":      [
+      ""
+    ],
+    "goldapi": {
+      "access_token": ""
+    }
+  },
+
+  "weather": {
+    "enabled":    false,
+    "api_key":    "",
+    "location": {
+      "lat": 0.0,
+      "lon": 0.0
+    },
+    "units":     "metric"
+  },
+
+  "comment_age_threshold_days": 0
 }
