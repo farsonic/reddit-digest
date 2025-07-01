@@ -37,7 +37,7 @@ reddit-digest/
    - Python 3.8+  
    - `pip3` installed  
 
-2. **Google Cloud Project Setup**  
+2. **Google Cloud Project Setup (Optional)**  
    1. **Enable APIs**  
       - Go to **APIs & Services → Library**, search for _Google Drive API_ and _Google Docs API_, and click **Enable** on each.  
    2. **Configure OAuth consent screen**  
