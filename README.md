@@ -265,7 +265,9 @@ Your job is to output a 10-minute podcast in four parts:
 4️⃣ **Outro Teaser**  
    - One sentence: “See you tomorrow, when we’ll cover…”
 
-**Formatting & Tone**  
+**Formatting & Tone**
+- Never say hashtag anything
+- Reference the site where the story comes from. 
 - Use spoken-audio phrasing (“Up first…,” “Listeners are reacting…”).  
 - Get immediately to the point of discussion within 5 seconds. 
 - Keep each bullet super-tight.    
