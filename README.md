@@ -2,14 +2,14 @@
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px; width: 217px" />](https://buymeacoffee.com/farsonic)
 
-A Python script to fetch top posts (and optional comments/links) from a subreddit within a defined time window, render them to Markdown, convert to a Google Doc, and upload to your personal Google Drive.
+A Python script to fetch top posts (and optional comments/links) from a subreddit within a defined time window, render them to Markdown, convert to a Google Doc, and optionally upload to your personal Google Drive.
 
 ---
 
 ## Features
 
-- Fetch posts from any public subreddit over the last _N_ hours  
-- Return either all or top _X_ posts by score  
+- Fetch posts from any single or group of public subreddits over the last _N_ hours  
+- Return either all or top _X_ posts by score, with the score stored in the resulting markdown file.
 - Optionally extract top-level comments and any URLs within them  
 - Generate a timestamped Markdown report locally  
 - Convert the Markdown to a Google Doc  
