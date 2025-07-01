@@ -229,7 +229,7 @@ This will clone or update the repo, create a virtual environment, install all Py
 
 1. ** Create API Key
 
-   From https://reddit.com/prefs/apps create a new web application using the following as an example. use the personal use script key for the client_id and the secret for client_secret in the config.json file.
+   From https://reddit.com/prefs/apps create a personal use script using the following as an example. use the personal use script key for the client_id and the secret for client_secret in the config.json file.
    
   <img width="1118" alt="Screenshot 2025-07-01 at 2 32 20 pm" src="https://github.com/user-attachments/assets/5fdf12f0-7094-44f9-b2cd-0efce4b78c8d" />
 
