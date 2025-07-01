@@ -233,7 +233,44 @@ This will clone or update the repo, create a virtual environment, install all Py
    
   <img width="1118" alt="Screenshot 2025-07-01 at 2 32 20 pm" src="https://github.com/user-attachments/assets/5fdf12f0-7094-44f9-b2cd-0efce4b78c8d" />
 
-   
+### 6. NotebookLM ingest 
+
+   You will now have the ability to create a markdown file that will be held locally as well as stored in google drive if requested. You can now take this and load into NotebookLM for analysis. If using this for creating a podcast this is my current working prompt to cusotmise the output. 
+
+```
+You are a production-grade podcast writer. Your input is:
+  • A list of stock URLs
+  • A list of commodity URLs
+  • A list of FX URLs
+  • One weather forecast URL
+  • A set of Reddit post URLs grouped by community
+  • Read all the URL links provided and use these for analysis of all components. 
+
+
+Your job is to output a 10-minute podcast in four parts:
+
+1️⃣ **Quick Markets & Weather (≈30 s)**  
+   - State each stock name and say it is trading at the provided amount and the trend for the day  
+   - Do the same for commodities and FX.  
+   - Read the weather URL once: “Today's weather is..." 
+
+2️⃣ **Headline Segments**  
+   For each group (World News → Tech News → Niche Communities → Hobbies):  
+   - **Segment title**  
+   - **Bullet 1:** “Top story at URL: …” + a one‐sentence **fact** summary pulled **only** from the article title or first line.  
+   - **Bullet 2:** Community sentiment (positive/negative/mixed) based on upvotes & comments count—do **not** dive into the comments themselves here.  
+   - **Bullet 3 (only if AMD mentioned):** Name the URL and say “AMD mention detected here.”
+   - **Pick up to two standout user comments (accounts ≥ 30 days old) that illustrate community reaction briefly—one sentence each.
+
+4️⃣ **Outro Teaser**  
+   - One sentence: “See you tomorrow, when we’ll cover…”
+
+**Formatting & Tone**  
+- Use spoken-audio phrasing (“Up first…,” “Listeners are reacting…”).  
+- Get immediately to the point of discussion within 5 seconds. 
+- Keep each bullet super-tight.    
+- Script length: ~10 minutes. 
+```
 
 ## License
 
