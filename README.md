@@ -10,11 +10,11 @@ A Python script to fetch top posts (and optional comments/links) from a Reddit s
 
 - Fetch posts from any single or group of public subreddits over the last _N_ hours  
 - Return either all or top _X_ posts by score, with the score stored in the resulting markdown file.
-- Optionally extract top-level comments and any URLs within them  
-- Generate a timestamped Markdown report locally
+- Optionally extract top-level comments and any URLs within them, while also ignoring posted with new accounts of a specific age  
+- Generate a timestamped Markdown report locally to a nominated directory
 - Embed specific stocks, commodites and local weather URL's into the markdown text. 
-- Convert the Markdown to a Google Doc  
-- Upload the Doc into a specified folder in your personal Drive  
+- Optionally convert the Markdown to a Google Doc  
+- Optionally upload the Doc into a specified folder in your personal Drive  
 
 ---
 
@@ -123,23 +123,92 @@ pip3 install praw \
 
 ## Usage
 
-1. **Run the script**  
-   ```bash
-   python3 reddit-notepad.py
-   ```  
-   You’ll be prompted for:  
-   - **Subreddit** (e.g. `worldnews`)  
-   - **Hours back** (e.g. `24`)  
-   - **Top posts** (enter `0` for all)  
-   - **Fetch comments & links?** (`y` or `n`)  
+### 1. Interactive Mode
 
-   On first Drive upload, a browser window will open—choose your Google account and grant the requested scopes. A `token.json` will be saved locally.
+```bash
+python3 reddit-notepad.py
+```
 
-2. **Check your outputs**  
-   - **Local** Markdown file in `./output/`  
-   - **Google Doc** in **My Drive → Reddit Reports**  
+On launch you’ll be prompted for:
+
+- **Subreddit** (e.g. `worldnews`)
+- **Hours back** (e.g. `24`)
+- **Top posts** (`0` = all, or e.g. `10`)
+- **Fetch comments & links?** (`y` or `n`)
+
+If Drive upload is enabled in your `config.json`, the first time you choose to upload, a browser window will open to authorize. A `token.json` file will then be saved for subsequent runs.
 
 ---
+
+### 2. Fully Non-Interactive (All Flags)
+
+You can override every prompt via flags:
+
+```bash
+python3 reddit-notepad.py \
+  --subreddits worldnews technews amiga \
+  --hours 12 \
+  --topn 20 \
+  --comments \
+  --debug
+```
+
+This will:
+
+- Fetch the top 20 posts from **worldnews**, **technews**, and **amiga**, from the last 12 hours
+- Include comments & links
+- Emit debug logging to stderr
+- Use your Drive settings from `config.json` to upload (unless you pass `--no-drive`)
+
+---
+
+### 3. Examples
+
+#### a) Just grab the last 5 new posts from r/networking, no comments, no Drive
+
+```bash
+python3 reddit-notepad.py \
+  --subreddits networking \
+  --hours 24 \
+  --topn 5 \
+  --no-drive
+```
+
+#### b) Scan multiple subreddits, include comments, upload to Drive
+
+```bash
+python3 reddit-notepad.py \
+  -s worldnews networking technews \
+  -H 6 \
+  -n 10 \
+  -c
+```
+
+#### c) Debug run for troubleshooting
+
+```bash
+python3 reddit-notepad.py --debug
+```
+
+You’ll see detailed logging of API calls, folder creation, etc.
+
+#### d) Use defaults from `config.json` but disable comments
+
+```bash
+python3 reddit-notepad.py --no-drive
+```
+
+*(This will still run against the subreddits, hours, and top_posts defined under `"default"` in your config, but skip both comments and Drive upload.)*
+
+---
+
+### 4. Output
+
+1. **Local Markdown**
+   Saved to the `local_dir` you set in `config.json` (default `./output/`).
+
+2. **Google Doc** (if enabled)
+   Placed in **My Drive → _folder_name_** in your account, then in a subfolder named today’s date.
 
 ## Installer Script
 
