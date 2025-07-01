@@ -1,59 +1,42 @@
 {
   "reddit": {
-    "client_id":     "",
-    "client_secret": "",
-    "user_agent":    ""
+    "client_id":            "",      /* Your Reddit API client ID */
+    "client_secret":        "",      /* Your Reddit API client secret */
+    "user_agent":           "",      /* Your app’s user agent string */
+    "comment_age_threshold_days": 30  /* Ignore comments from accounts younger than this */
   },
 
   "subreddits": [
-    ""
+    "worldnews",
+    "technews"
   ],
 
   "default": {
-    "hours":      24,
-    "top_posts":  0
+    "hours":     8,  
+    "top_posts": 10   
   },
 
   "output": {
-    "local_dir":         "./output",
-    "include_comments":  false
+    "local_dir":        "./output",      
+    "include_comments": true    
   },
 
   "drive": {
-    "enabled":           false,
-    "credentials_file":  "",
-    "folder_name":       ""
+    "enabled":          false,  
+    "credentials_file": "",     
+    "folder_name":      ""     
   },
 
-  "stocks": {
-    "enabled":    false,
-    "symbols":    [
-      ""
+  "urls": {
+    "stocks": [
+      "https://finance.yahoo.com/quote/AMD/"
     ],
-    "alpha_vantage": {
-      "api_key": ""
-    }
-  },
-
-  "commodities": {
-    "enabled":    false,
-    "items":      [
-      ""
+    "commodities": [
+      "https://finance.yahoo.com/quote/GC=F/"
     ],
-    "goldapi": {
-      "access_token": ""
-    }
-  },
-
-  "weather": {
-    "enabled":    false,
-    "api_key":    "",
-    "location": {
-      "lat": 0.0,
-      "lon": 0.0
-    },
-    "units":     "metric"
-  },
-
-  "comment_age_threshold_days": 0
+    "fx": [
+      "https://finance.yahoo.com/quote/AUDUSD=X/"
+    ],
+    "weather": "https://www.accuweather.com/en/gb/london/ec4a-2/weather-forecast/328328" 
+  }
 }
