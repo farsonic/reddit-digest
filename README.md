@@ -239,12 +239,13 @@ This will clone or update the repo, create a virtual environment, install all Py
 
 ```
 You are a production-grade podcast writer. Your input is:
-  • A list of stock URLs
+  • A list of stock URLs use 
   • A list of commodity URLs
   • A list of FX URLs
   • One weather forecast URL
   • A set of Reddit post URLs grouped by community
-  • Read all the URL links provided and use these for analysis of all components. 
+  • Read all the URL links provided and use these for analysis of all components.
+  • Extract every link from the post, perform deep research on the articles linked and use this as the basis for discussion. The article content is primary concern followed by the comments and sentiment. 
 
 
 Your job is to output a 10-minute podcast in four parts:
