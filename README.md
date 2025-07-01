@@ -34,7 +34,7 @@ reddit-digest/
 ## Prerequisites
 
 1. **Python & pip**  
-   - Python 3.8+  
+   - Python 3.8+  (python3.12-venv) 
    - `pip3` installed  
 
 2. **Google Cloud Project Setup (Optional)**  
@@ -224,6 +224,16 @@ bash <(curl -s https://raw.githubusercontent.com/farsonic/reddit-digest/main/ins
 This will clone or update the repo, create a virtual environment, install all Python deps, and prompt you to configure `config.json` & place `gdrive-creds.json`.
 
 ---
+
+### 5. Create Reddit API Credentials. 
+
+1. ** Create API Key
+
+   From https://reddit.com/prefs/apps create a new web application using the following as an example. use the personal use script key for the client_id and the secret for client_secret in the config.json file.
+   
+  <img width="1118" alt="Screenshot 2025-07-01 at 2 32 20 pm" src="https://github.com/user-attachments/assets/5fdf12f0-7094-44f9-b2cd-0efce4b78c8d" />
+
+   
 
 ## License
 
