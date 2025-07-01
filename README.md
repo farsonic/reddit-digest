@@ -53,7 +53,10 @@ reddit-digest/
       - In **APIs & Services → Credentials**, click **Create Credentials → OAuth client ID**.  
       - Choose **Desktop app**, name it, and download the JSON as `gdrive-creds.json`.  
 
-3. **Git** (for installer)  
+3. **Others** (for installer)
+   - git
+   - curl
+   - 
 
 ---
 
