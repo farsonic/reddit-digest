@@ -2,7 +2,7 @@
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px; width: 217px" />](https://buymeacoffee.com/farsonic)
 
-A Python script to fetch top posts (and optional comments/links) from a subreddit within a defined time window, render them to Markdown, convert to a Google Doc, and optionally upload to your personal Google Drive.
+A Python script to fetch top posts (and optional comments/links) from a Reddit subreddit within a defined time window, render them to Markdown, and optionally convert to a Google Doc and upload to your personal Google Drive. There is also the ability to hardcode specific subreddits in a local config file as well as specific stock, commodities and weather to embed into the Markdown. The expectation is that once the specified groups have been converted to markdown they can be uploaded into NotepadLM for analysis and podcast creation. 
 
 ---
 
@@ -11,7 +11,8 @@ A Python script to fetch top posts (and optional comments/links) from a subreddi
 - Fetch posts from any single or group of public subreddits over the last _N_ hours  
 - Return either all or top _X_ posts by score, with the score stored in the resulting markdown file.
 - Optionally extract top-level comments and any URLs within them  
-- Generate a timestamped Markdown report locally  
+- Generate a timestamped Markdown report locally
+- Embed specific stocks, commodites and local weather URL's into the markdown text. 
 - Convert the Markdown to a Google Doc  
 - Upload the Doc into a specified folder in your personal Drive  
 
@@ -63,18 +64,43 @@ Create a `config.json` in the root of this repo with **your** Reddit & Drive set
 ```json
 {
   "reddit": {
-    "client_id":     "YOUR_REDDIT_CLIENT_ID",
-    "client_secret": "YOUR_REDDIT_CLIENT_SECRET",
-    "user_agent":    "macos:newslister:v1.0 (by u/YourRedditUser)"
+    "client_id":            "",      /* Your Reddit API client ID */
+    "client_secret":        "",      /* Your Reddit API client secret */
+    "user_agent":           "",      /* Your app’s user agent string */
+    "comment_age_threshold_days": 0  /* Ignore comments from accounts younger than this */
   },
+
+  "subreddits": [
+    /* List your subreddits here, e.g. "worldnews", "tech" */
+  ],
+
+  "default": {
+    "hours":     0,  /* Look back this many hours */
+    "top_posts": 0   /* Number of top posts (0 = all new posts) */
+  },
+
   "output": {
-    "local_dir": "./output",
-    "include_comments": true
+    "local_dir":        "",      /* Where to save the .md files */
+    "include_comments": false    /* true to pull comments & links */
   },
+
   "drive": {
-    "enabled": true,
-    "credentials_file": "gdrive-creds.json",
-    "folder_name": "Reddit Reports"
+    "enabled":          false,  /* true to enable Google Drive upload */
+    "credentials_file": "",     /* Path to your OAuth client JSON */
+    "folder_name":      ""      /* Name of the Drive folder to use */
+  },
+
+  "urls": {
+    "stocks": [
+      /* e.g. "https://finance.yahoo.com/quote/AMD/" */
+    ],
+    "commodities": [
+      /* e.g. "https://finance.yahoo.com/quote/GC=F/" */
+    ],
+    "fx": [
+      /* e.g. "https://finance.yahoo.com/quote/AUDUSD=X/" */
+    ],
+    "weather": ""  /* e.g. "https://www.accuweather.com/…" */
   }
 }
 ```
