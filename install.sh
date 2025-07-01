@@ -14,17 +14,26 @@ else
     cd reddit-digest
 fi
 
-# 2️⃣ Create a virtual environment
+# 2️⃣ Create a Python virtual environment
 echo "Creating virtual environment..."
 python3 -m venv venv
+# shellcheck disable=SC1091
 source venv/bin/activate
 
-# 3️⃣ Install Python dependencies
+# 3️⃣ Upgrade pip & install dependencies
 echo "Installing Python dependencies..."
 pip install --upgrade pip
-pip install praw google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib podcastfy
 
-# 4️⃣ Reminder: configure credentials
+# Core Reddit + Google APIs
+pip install \
+    praw \
+    requests \
+    google-api-python-client \
+    google-auth \
+    google-auth-httplib2 \
+    google-auth-oauthlib
+
+# 4️⃣ Remind to configure
 cat <<EOF
 
 ✅ Setup complete.
@@ -32,6 +41,6 @@ cat <<EOF
 Next steps:
  1. Copy and edit config.json with your Reddit API credentials.
  2. Place your OAuth client JSON (gdrive-creds.json) in this folder.
- 3. Run the script: python3 reddit_digest.py
-EOF
+ 3. Run the script: python3 reddit-notepad.py [--help]
 
+EOF
